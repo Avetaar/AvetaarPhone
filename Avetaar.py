@@ -48,6 +48,78 @@ AVETAAR_NUMBER_TYPES = {
     99: "مجهول",
 }
 
+AVETAAR_FLAGS = {
+    "AF": "🇦🇫", "AL": "🇦🇱", "DZ": "🇩🇿",
+    "AS": "🇦🇸", "AD": "🇦🇩", "AO": "🇦🇴",
+    "AI": "🇦🇮", "AG": "🇦🇬", "AR": "🇦🇷",
+    "AM": "🇦🇲", "AT": "🇦🇹", "AU": "🇦🇺",
+    "AZ": "🇦🇿", "BS": "🇧🇸", "BH": "🇧🇭",
+    "BD": "🇧🇩", "BB": "🇧🇧", "BY": "🇧🇾",
+    "BE": "🇧🇪", "BZ": "🇧🇿", "BT": "🇧🇹",
+    "BO": "🇧🇴", "BA": "🇧🇦", "BW": "🇧🇼",
+    "BV": "🇧🇻", "BR": "🇧🇷", "BN": "🇧🇳",
+    "BG": "🇧🇬", "BF": "🇧🇩", "BI": "🇧🇮",
+    "KH": "🇭🇭", "CM": "🇨🇲", "CA": "🇨🇦",
+    "CV": "🇨🇻", "KY": "🇰🇾", "CF": "🇨🇫",
+    "TD": "🇹🇩", "CL": "🇨🇱", "CN": "🇨🇳",
+    "CY": "🇨🇾", "CZ": "🇨🇿", "DE": "🇩🇪",
+    "DK": "🇩🇰", "DO": "🇩🇴", "EC": "🇪🇨",
+    "EG": "🇪🇬", "SV": "🇪🇻", "EE": "🇪🇪",
+    "ET": "🇪🇹", "FI": "🇫🇮", "FR": "🇫🇷",
+    "GE": "🇬🇪", "GR": "🇬🇷", "GD": "🇬🇩",
+    "GT": "🇬🇹", "GU": "🇬🇺", "GQ": "🇬🇶",
+    "IN": "🇮🇳", "ID": "🇮🇩", "IR": "🇮🇷",
+    "IQ": "🇮🇶", "IE": "🇮🇪", "IL": "🇮🇱",
+    "IT": "🇮🇹", "JP": "🇯🇵", "JO": "🇯🇴",
+    "KZ": "🇰🇿", "KE": "🇰🇪", "KI": "🇰🇮",
+    "KR": "🇰🇵", "KW": "🇰🇼", "KG": "🇰🇬",
+    "LA": "🇱🇦", "LB": "🇱🇧", "LS": "🇱🇸",
+    "LV": "🇱🇻", "LR": "🇱🇷", "LY": "🇱🇾",
+    "LT": "🇱🇹", "LU": "🇱🇺", "MO": "🇲🇴",
+    "MK": "🇲🇰", "MG": "🇲🇬", "MY": "🇲🇾",
+    "MV": "🇲🇻", "MW": "🇲🇼", "MX": "🇲🇽",
+    "FM": "🇫🇲", "MD": "🇲🇩", "MA": "🇲🇦",
+    "MN": "🇲🇳", "ME": "🇲🇪", "MS": "🇲🇸",
+    "MZ": "🇲🇿", "MM": "🇲🇲", "NA": "🇳🇦",
+    "NR": "🇳🇷", "NP": "🇳🇵", "NL": "🇳🇱",
+    "NZ": "🇳🇿", "NI": "🇳🇮", "NE": "🇳🇪",
+    "NG": "🇳🇬", "MP": "🇲🇵", "NO": "🇳🇴",
+    "OM": "🇴🇲", "PK": "🇵🇰", "PA": "🇵🇦",
+    "PG": "🇵🇬", "PY": "🇵🇾", "PE": "🇵🇪",
+    "PH": "🇵🇭", "PN": "🇵🇳", "PL": "🇵🇱",
+    "PT": "🇵🇹", "PR": "🇵🇷", "QA": "🇶🇦",
+    "RO": "🇷🇴", "RU": "🇷🇺", "RW": "🇷🇼",
+    "SA": "🇸🇦", "SN": "🇸🇳", "SG": "🇸🇬",
+    "SK": "🇸🇰", "SI": "🇸🇮", "SS": "🇸🇸",
+    "SZ": "🇸🇿", "SE": "🇸🇪", "CH": "🇨🇭",
+    "TN": "🇹🇳", "TR": "🇹🇷", "TT": "🇹🇹",
+    "TW": "🇹🇼", "TZ": "🇹🇿", "TH": "🇹🇭",
+    "TL": "🇹🇱", "TG": "🇹🇪", "HK": "🇭🇰",
+    "UM": "🇺🇲", "US": "🇺🇸", "UY": "🇺🇾",
+    "UZ": "🇺🇿", "VA": "🇻🇦", "VU": "🇻🇺",
+    "VN": "🇻🇳", "WF": "🇼🇫", "EH": "🇪🇭",
+    "YE": "🇾🇪", "ZM": "🇿🇲", "ZW": "🇿🇼",
+}
+
+def avetaar_flag(region_code: str) -> str:
+    return AVETAAR_FLAGS.get(region_code or "", "")
+
+def avetaar_country_time(region_code: str, tz_names: list) -> str:
+    import datetime
+    import zoneinfo
+    tz_name = tz_names[0] if tz_names else None
+    try:
+        if tz_name:
+            tz = zoneinfo.ZoneInfo(tz_name)
+            return datetime.datetime.now(tz).strftime("%H:%M %Z")
+    except Exception:
+        pass
+    try:
+        tz = zoneinfo.ZoneInfo(f"Etc/GMT0")
+        return datetime.datetime.now(tz).strftime("%H:%M UTC")
+    except Exception:
+        return "?"
+
 def avetaar_parse_number(raw: str):
     raw = (raw or "").strip()
     if not raw:
@@ -65,7 +137,7 @@ def avetaar_number_type_name(number) -> str:
 
 def avetaar_number_details(number) -> dict:
     region = phonenumbers.region_code_for_number(number) or "؟"
-    country_name = geocoder.country_name_for_number(number, "en") or "مجهولة"
+    country_name = geocoder.country_name_for_number(number, "en") or "غير معروفة"
     location = geocoder.description_for_number(number, "en")
     carrier_name = carrier.name_for_number(number, "en") or "غير معروف"
     tzs = timezone.time_zones_for_number(number)
@@ -100,6 +172,20 @@ def avetaar_number_details(number) -> dict:
         "تنسيق E164": e164,
         "تنسيق RFC3966": rfc3966,
         "الإضافة (Extension)": ext,
+        "رابط واتساب": "https://wa.me/" + e164.lstrip("+"),
+        "رابط مكالمه": f"tel:{e164.lstrip('+')}",
+        "رابط خريطة": (f"https://www.google.com/maps?q={region}" if region not in ("؟", "") else "غير متاح"),
+        "رقم موبايل صالح": bool(phonenumbers.is_valid_number(number) and phonenumbers.is_possible_number_for_type(number, phonenumbers.PhoneNumberType.MOBILE)),
+        "متوفر للمقارنة": True,
+        "رابط تلكرام": ("https://t.me/" + national_sig if not national_sig.startswith("0") else "غير متاح"),
+        "طول الرقم": len(str(number.national_number)),
+        "رمز الدولة فقط": str(number.country_code),
+        "صيغة الهاتف": phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.INTERNATIONAL),
+        "صيغة وطنية": phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.NATIONAL),
+        "علم الدولة": avetaar_flag(region),
+        "الساعة المحلية": avetaar_country_time(region, tzs),
+        "وصف الدولة": f"https://en.wikipedia.org/wiki/{country_name.replace(' ', '_').lower()}" if country_name not in ("غير معروفة", "مجهولة") else "غير متاح",
+        "الرقم الوطني": national_sig,
     }
 
 def avetaar_format_terminal(details: dict) -> str:
@@ -141,6 +227,12 @@ def avetaar_terminal_loop():
     import sys
     sys.exit(0)
 
+def avetaar_record(number_raw: str, details: dict):
+    entry = {"رقم": details['رقم الهاتف'], "دولة": details['اسم الدولة'], "مشغل": details['المشغل (SIM)'], "نوع": details['نوع الرقم']}
+    AVETAAR_RECENT.append(entry)
+    if len(AVETAAR_RECENT) > 5:
+        AVETAAR_RECENT.pop(0)
+
 def avetaar_load_bot_token() -> str:
     import os
     return os.environ.get("AVETAAR_BOT_TOKEN", AVETAAR_BUILTIN_BOT_TOKEN)
@@ -165,9 +257,12 @@ def avetaar_bot_message(details: dict) -> str:
     L = []
     L.append(f"📞 <b>{avetaar_esc(details['رقم الهاتف'])}</b>")
     L.append("")
-    L.append(f"🌍 الدولة: <b>{avetaar_esc(details['اسم الدولة'])}</b> ({avetaar_esc(details['رمز الدولة'])})")
+    flag = details.get('علم الدولة', '')
+    clock = details.get('الساعة المحلية', '')
+    L.append(f"{flag} 🌍 الدولة: <b>{avetaar_esc(details['اسم الدولة'])}</b> ({avetaar_esc(details['رمز الدولة'])})")
     L.append(f"📍 الموقع: {avetaar_esc(details['الموقع'])}")
     L.append(f"📶 المشغل (SIM): <b>{avetaar_esc(details['المشغل (SIM)'])}</b>")
+    L.append(f"⏰ الساعة هناك: <b>{avetaar_esc(clock)}</b> — 📏 طول الرقم: {avetaar_esc(details['طول الرقم'])} رقم")
     L.append(f"🧩 النوع: {avetaar_esc(details['نوع الرقم'])}")
     valid_str = "✅ صالح" if details['صالح'] else "⛔ غير صالح"
     mobile_str = "✅ ممكن موبايل" if details['ممكن موبايل'] else "⛔ غير ممكن موبايل"
@@ -178,18 +273,21 @@ def avetaar_bot_message(details: dict) -> str:
     L.append(f"🔢 E164: <code>{avetaar_esc(details['تنسيق E164'])}</code>")
     L.append(f"🔗 RFC3966: <code>{avetaar_esc(details['تنسيق RFC3966'])}</code>")
     L.append("")
+    L.append("⬇️ استخدم الأزرار بالأسفل:")
+    L.append("")
     L.append(f"⚙️ {AVETAAR_NAME} {AVETAAR_DEV} — {AVETAAR_CHANNEL}")
     return "\n".join(L)
 
+AVETAAR_BTN_COLORS = {
+    "action": "primary",
+    "test": "primary",
+    "validate": "success",
+    "exit": "danger",
+    "back": "success",
+}
+
 def avetaar_btn(text: str, callback_data: str, color_key: str) -> dict:
-    BTN_STYLE = {
-        "search": ("primary", ""),
-        "players": ("success", ""),
-        "positive": ("success", ""),
-        "negative": ("danger", ""),
-        "info": ("primary", ""),
-    }
-    style, _ = BTN_STYLE.get(color_key, ("", ""))
+    style = AVETAAR_BTN_COLORS.get(color_key, "primary")
     b = {"text": text, "callback_data": callback_data}
     if style:
         b["style"] = style
@@ -199,26 +297,46 @@ def avetaar_buttons_menu() -> dict:
     return {
         "inline_keyboard": [
             [
-                avetaar_btn("📞 أدخل رقم", "phone_input", "search"),
-                avetaar_btn("📋 نسخ E164", "copy_e164", "positive"),
+                avetaar_btn("📞 أدخل رقم", "phone_input", "action"),
+                avetaar_btn("✅ فحص موبايل", "validate_mobile", "validate"),
             ],
             [
-                avetaar_btn("🔍 رقم تجريبي", "test_number", "info"),
-                avetaar_btn("❌ خروج", "exit", "negative"),
+                avetaar_btn("⚡ فحص سريع", "batch_input", "action"),
+                avetaar_btn("🔀 مقارنة رقمين", "compare_input", "action"),
+            ],
+            [
+                avetaar_btn("🎲 رقم عشوائي", "random_number", "test"),
+                avetaar_btn("🔍 رقم تجريبي", "test_number", "test"),
+            ],
+            [
+                avetaar_btn("📊 آخر 5 فحص", "recent_history", "back"),
+                avetaar_btn("❌ خروج", "exit", "exit"),
             ],
         ]
     }
 
+def avetaar_prompt_buttons() -> dict:
+    return {
+        "inline_keyboard": [
+            [avetaar_btn("❌ خروج", "exit", "exit")],
+        ]
+    }
+
 _pending_action = {}
+AVETAAR_RECENT = []
 
 def avetaar_handle_callback(token: str, update: dict):
     cb = update["callback_query"]
     chat_id = cb["message"]["chat"]["id"]
     data = cb["data"]
-    avetaar_tg_call(token, "answerCallbackQuery", {"callback_query_id": cb["id"]})
+    try:
+        avetaar_tg_call(token, "answerCallbackQuery", {"callback_query_id": cb["id"]})
+    except Exception:
+        pass
     if data == "menu":
-        avetaar_tg_call(token, "sendMessage", {
+        avetaar_tg_call(token, "editMessageText", {
             "chat_id": chat_id,
+            "message_id": cb["message"]["message_id"],
             "text": "اختر:",
             "reply_markup": avetaar_buttons_menu(),
         })
@@ -233,14 +351,85 @@ def avetaar_handle_callback(token: str, update: dict):
             "chat_id": chat_id,
             "text": "📞 اكتب رقم الهاتف:\nمثال: <code>+9647701234567</code> أو <code>9647701234567</code>",
             "parse_mode": "HTML",
-            "reply_markup": avetaar_buttons_menu(),
+            "reply_markup": avetaar_prompt_buttons(),
         })
     elif data == "test_number":
         avetaar_send_number_result(token, chat_id, "9647701234567")
+    elif data == "validate_mobile":
+        _pending_action[chat_id] = "validate_mobile"
+        avetaar_tg_call(token, "sendMessage", {
+            "chat_id": chat_id,
+            "text": "✅ اكتب رقم لتفحص إذا كان موبايل صالح:\nمثال: <code>9647701234567</code>",
+            "parse_mode": "HTML",
+            "reply_markup": avetaar_prompt_buttons(),
+        })
+    elif data == "batch_input":
+        _pending_action[chat_id] = "batch"
+        avetaar_tg_call(token, "sendMessage", {
+            "chat_id": chat_id,
+            "text": "⚡ الصق 2-5 أرقام (سطر لكل رقم):\n9647701234567\n9647509876543\n12025551234",
+            "parse_mode": "HTML",
+            "reply_markup": avetaar_prompt_buttons(),
+        })
+    elif data == "compare_input":
+        _pending_action[chat_id] = "compare"
+        avetaar_tg_call(token, "sendMessage", {
+            "chat_id": chat_id,
+            "text": "🔀 اكتب رقمين بمسافة واحدة بينهما للمقارنة:\n9647701234567 9647509876543",
+            "parse_mode": "HTML",
+            "reply_markup": avetaar_prompt_buttons(),
+        })
+    elif data == "random_number":
+        import random
+        region = random.choice(["964", "966", "971", "974", "20", "90", "234", "34", "44"])
+        num = random.randint(10000000, 99999999)
+        raw = f"{region}{num}"
+        avetaar_send_number_result(token, chat_id, raw)
+    elif data == "recent_history":
+        if AVETAAR_RECENT:
+            L = ["📊 آخر الفحوصات:"]
+            for i, e in enumerate(AVETAAR_RECENT, 1):
+                L.append(f"{i}. <b>{avetaar_esc(e['رقم'])}</b> — {avetaar_esc(e['دولة'])} / {avetaar_esc(e['مشغل'])} / {avetaar_esc(e['نوع'])}")
+            avetaar_tg_call(token, "sendMessage", {
+                "chat_id": chat_id,
+                "text": "\n".join(L),
+                "parse_mode": "HTML",
+                "reply_markup": avetaar_buttons_menu(),
+            })
+        else:
+            avetaar_tg_call(token, "sendMessage", {
+                "chat_id": chat_id,
+                "text": "ماكو فحص بعد — جرّب زر '📞 أدخل رقم' أو '🎲 رقم عشوائي'.",
+                "reply_markup": avetaar_buttons_menu(),
+            })
+    elif data.startswith("call_"):
+        num = data.replace("call_", "")
+        avetaar_tg_call(token, "sendMessage", {
+            "chat_id": chat_id,
+            "text": "📞 رابط الاتصال:\n<code>tel:" + avetaar_esc(num) + "</code>",
+            "parse_mode": "HTML",
+            "reply_markup": avetaar_buttons_menu(),
+        })
+    elif data.startswith("copy_e164_"):
+        e164 = data.replace("copy_e164_", "")
+        avetaar_tg_call(token, "sendMessage", {
+            "chat_id": chat_id,
+            "text": f"📋 الرقم ب صيغة E164:\n<code>{avetaar_esc(e164)}</code>",
+            "parse_mode": "HTML",
+            "reply_markup": avetaar_buttons_menu(),
+        })
+    elif data.startswith("copy_nat_"):
+        nat = data.replace("copy_nat_", "")
+        avetaar_tg_call(token, "sendMessage", {
+            "chat_id": chat_id,
+            "text": f"📋 نسخت الرقم الوطني <code>{avetaar_esc(nat)}</code> — انسخه من الرسالة.",
+            "parse_mode": "HTML",
+            "reply_markup": avetaar_buttons_menu(),
+        })
     elif data == "copy_e164":
         avetaar_tg_call(token, "sendMessage", {
             "chat_id": chat_id,
-            "text": "📋 أولّد رقم تجريبيًا ونسخ E164:\n<code>+964 770 123 4567</code>\n\nشوف تفاصيل الرقم من زر '🔍 رقم تجريبي'.",
+            "text": "📋 أولّد رقم تجريبيًا ونسخ E164:\n<code>+9647701234567</code>\n\nشوف تفاصيل الرقم من زر '🔍 رقم تجريبي'.",
             "parse_mode": "HTML",
             "reply_markup": avetaar_buttons_menu(),
         })
@@ -258,25 +447,146 @@ def avetaar_handle_update(token: str, u: dict):
                 "reply_markup": avetaar_buttons_menu(),
             })
         elif not text.startswith("/"):
-            if chat_id in _pending_action:
-                action = _pending_action.pop(chat_id)
-                if action == "phone":
-                    avetaar_send_number_result(token, chat_id, text)
+            action = _pending_action.get(chat_id)
+            if action == "phone":
+                _pending_action.pop(chat_id)
+                avetaar_send_number_result(token, chat_id, text)
+            elif action == "validate_mobile":
+                _pending_action.pop(chat_id)
+                avetaar_validate_mobile(token, chat_id, text)
+            elif action == "batch":
+                _pending_action.pop(chat_id)
+                avetaar_batch_check(token, chat_id, text)
+            elif action == "compare":
+                _pending_action.pop(chat_id)
+                avetaar_compare_two(token, chat_id, text)
             else:
                 avetaar_send_number_result(token, chat_id, text)
     cb = u.get("callback_query")
     if cb:
         avetaar_handle_callback(token, u)
 
+def avetaar_validate_mobile(token: str, chat_id: int, raw_number: str):
+    number = avetaar_parse_number(raw_number)
+    if not number:
+        avetaar_tg_call(token, "sendMessage", {
+            "chat_id": chat_id,
+            "text": f"⛔ رقم غير صالح: <b>{avetaar_esc(raw_number)}</b>",
+            "parse_mode": "HTML",
+            "reply_markup": avetaar_buttons_menu(),
+        })
+        return
+    is_valid = phonenumbers.is_valid_number(number)
+    is_mobile = phonenumbers.is_possible_number_for_type(number, phonenumbers.PhoneNumberType.MOBILE)
+    if is_valid and is_mobile:
+        L = [f"✅ <b>{avetaar_esc(raw_number)}</b> — رقم موبايل صالح!"]
+    else:
+        L = [f"❌ <b>{avetaar_esc(raw_number)}</b> — "]
+        L.append("رقم غير صالح" if not is_valid else "رقم صالح بس مو موبايل")
+    avetaar_tg_call(token, "sendMessage", {
+        "chat_id": chat_id,
+        "text": "\n".join(L),
+        "parse_mode": "HTML",
+        "reply_markup": avetaar_buttons_menu(),
+    })
+
+def avetaar_batch_check(token: str, chat_id: int, raw_text: str):
+    nums = [n.strip() for n in raw_text.splitlines() if n.strip()]
+    L = ["⚡ نتائج الفحص السريع:"]
+    valid_count = 0
+    mobile_count = 0
+    total = min(len(nums), 5)
+    for raw in nums[:5]:
+        number = avetaar_parse_number(raw)
+        if not number:
+            L.append(f"⛔ <b>{avetaar_esc(raw)}</b> — رقم غير صالح")
+            continue
+        details = avetaar_number_details(number)
+        avetaar_record(raw, details)
+        ok = "✅" if details['صالح'] else "❌"
+        if details['صالح']:
+            valid_count += 1
+        if details['ممكن موبايل']:
+            mobile_count += 1
+        flag = details.get('علم الدولة', '')
+        L.append(f"{ok} {flag} <b>{avetaar_esc(details['رقم الهاتف'])}</b> — {avetaar_esc(details['اسم الدولة'])} / {avetaar_esc(details['المشغل (SIM)'])} / {avetaar_esc(details['نوع الرقم'])}")
+    L.append("")
+    L.append(f"📊 الإحصائيات: {valid_count}/{total} صالحة · {mobile_count}/{total} موبايلات")
+    avetaar_tg_call(token, "sendMessage", {
+        "chat_id": chat_id,
+        "text": "\n".join(L),
+        "parse_mode": "HTML",
+        "reply_markup": avetaar_buttons_menu(),
+    })
+
+def avetaar_compare_two(token: str, chat_id: int, raw_text: str):
+    parts = raw_text.split()
+    if len(parts) != 2:
+        avetaar_tg_call(token, "sendMessage", {
+            "chat_id": chat_id,
+            "text": "⛔ لازم تكتب رقمين بمسافة واحدة بينهما.",
+            "reply_markup": avetaar_buttons_menu(),
+        })
+        return
+    n1, n2 = avetaar_parse_number(parts[0]), avetaar_parse_number(parts[1])
+    if not n1 or not n2:
+        avetaar_tg_call(token, "sendMessage", {
+            "chat_id": chat_id,
+            "text": "⛔ رقم واحد أو الاثنين غير صالح.",
+            "reply_markup": avetaar_buttons_menu(),
+        })
+        return
+    d1, d2 = avetaar_number_details(n1), avetaar_number_details(n2)
+    avetaar_record(parts[0], d1)
+    avetaar_record(parts[1], d2)
+    L = [f"🔀 مقارنة: <b>{avetaar_esc(d1['رقم الهاتف'])}</b> vs <b>{avetaar_esc(d2['رقم الهاتف'])}</b>", ""]
+    L.append(f"الدولة: {avetaar_esc(d1['اسم الدولة'])} vs {avetaar_esc(d2['اسم الدولة'])} {'✅ نفس الدولة' if d1['اسم الدولة'] == d2['اسم الدولة'] else '⛔ دولتين مختلفين'}")
+    L.append(f"المشغل: {avetaar_esc(d1['المشغل (SIM)'])} vs {avetaar_esc(d2['المشغل (SIM)'])} {'✅ نفس المشغل' if d1['المشغل (SIM)'] == d2['المشغل (SIM)'] else '⛔ مشغلين مختلفين'}")
+    L.append(f"النوع: {avetaar_esc(d1['نوع الرقم'])} vs {avetaar_esc(d2['نوع الرقم'])}")
+    L.append(f"صالح: {'✅' if d1['صالح'] else '❌'} vs {'✅' if d2['صالح'] else '❌'}")
+    avetaar_tg_call(token, "sendMessage", {
+        "chat_id": chat_id,
+        "text": "\n".join(L),
+        "parse_mode": "HTML",
+        "reply_markup": avetaar_buttons_menu(),
+    })
+
+def avetaar_result_buttons(details: dict) -> dict:
+    wa = details['رابط واتساب']
+    tel = details['رابط مكالمه']
+    maps = details['رابط خريطة']
+    flag = details.get('علم الدولة', '')
+    return {
+        "inline_keyboard": [
+            [
+                {"text": "💬 واتساب", "url": wa, "style": "success"},
+                {"text": "📞 مكالمة", "callback_data": "call_" + details['رقم الهاتف'].lstrip('+'), "style": "primary"},
+            ],
+            [
+                {"text": "🗺️ خريطة الدولة", "url": maps, "style": "primary"},
+                {"text": "🌐 ويكيبيديا", "url": details.get('وصف الدولة', "https://en.wikipedia.org"), "style": "primary"},
+            ],
+            [
+                {"text": "📋 نسخ E164", "callback_data": "copy_e164_" + details['تنسيق E164'], "style": "success"},
+                {"text": "📋 نسخ الوطنية", "callback_data": "copy_nat_" + details['الرقم الوطني'], "style": "primary"},
+            ],
+            [
+                {"text": f"{flag} 📞 رقم جديد", "callback_data": "phone_input", "style": "success"},
+                {"text": "🔙 رجوع للقائمة", "callback_data": "menu", "style": "danger"},
+            ],
+        ]
+    }
+
 def avetaar_send_number_result(token: str, chat_id: int, raw_number: str):
     number = avetaar_parse_number(raw_number)
     if number:
         details = avetaar_number_details(number)
+        avetaar_record(raw_number, details)
         avetaar_tg_call(token, "sendMessage", {
             "chat_id": chat_id,
             "text": avetaar_bot_message(details),
             "parse_mode": "HTML",
-            "reply_markup": avetaar_buttons_menu(),
+            "reply_markup": avetaar_result_buttons(details),
         })
     else:
         avetaar_tg_call(token, "sendMessage", {
@@ -325,6 +635,7 @@ def avetaar_bot_run_long_poll():
     print(f"{C('GREEN')}🚀 {AVETAAR_NAME} بوت شغّال... (Ctrl+C للإيقاف){RST()}")
     last_update_id = 0
     error_count = 0
+    conflict_count = 0
     while True:
         try:
             d = avetaar_tg_call(token, "getUpdates", {
@@ -333,6 +644,7 @@ def avetaar_bot_run_long_poll():
                 "timeout": 10,
             })
             error_count = 0
+            conflict_count = 0
             for u in d:
                 last_update_id = u["update_id"]
                 try:
@@ -345,10 +657,21 @@ def avetaar_bot_run_long_poll():
             print(f"{C('YELLOW')}⚠️ اتصال مفقود — إعادة بعد {wait} ثوانٍ...{RST()}")
             time.sleep(wait)
         except RuntimeError as e:
-            error_count += 1
-            wait = min(5 * error_count, 30)
-            print(f"{C('YELLOW')}⚠️ خطأ تلكرام: {e} — إعادة بعد {wait} ثوانٍ...{RST()}")
-            time.sleep(wait)
+            if "Conflict" in str(e):
+                conflict_count += 1
+                if conflict_count >= 5:
+                    print(f"{C('RED')}⛔ نسخة ثانية من البوت شغّالة بنفس التوكن — أغلها أولًا.{RST()}")
+                    print(f"   أغلق البرنامج الثاني ثم أعد تشغيل هذا البوت.")
+                    time.sleep(15)
+                    conflict_count = 0
+                else:
+                    print(f"{C('YELLOW')}⚠️ Conflict (نسخة ثانية) — إعادة بعد 5 ثوانٍ...{RST()}")
+                    time.sleep(5)
+            else:
+                error_count += 1
+                wait = min(5 * error_count, 30)
+                print(f"{C('YELLOW')}⚠️ خطأ تلكرام: {e} — إعادة بعد {wait} ثوانٍ...{RST()}")
+                time.sleep(wait)
 
 def avetaar_main():
     import argparse
