@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+venv/
+.env
+.bot_lock
+*.egg-info/
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
