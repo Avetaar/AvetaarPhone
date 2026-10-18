@@ -4,6 +4,24 @@ AVETAAR_DEV = "@Avetaar"
 AVETAAR_CHANNEL = "https://t.me/RivalStudio"
 AVETAAR_VERSION = "1.0.0"
 
+AVETAAR_PACKAGES = ["phonenumbers", "requests", "colorama"]
+
+def avetaar_ensure_deps():
+    import subprocess, sys
+    for pkg in AVETAAR_PACKAGES:
+        try:
+            __import__(pkg)
+        except ImportError:
+            print(f"\033[36m[Avetaar] تثبيت {pkg}...\033[0m")
+            try:
+                subprocess.check_call([sys.executable, "-m", "pip", "install", pkg], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except subprocess.CalledProcessError:
+                subprocess.check_call([sys.executable, "-m", "pip", "install", "--user", pkg])
+            print(f"\033[32m[Avetaar] تم تثبيت {pkg}\033[0m")
+    avetaar_ensure_deps = None
+
+avetaar_ensure_deps()
+
 try:
     import phonenumbers
     from phonenumbers import geocoder, carrier, timezone

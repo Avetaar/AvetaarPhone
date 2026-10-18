@@ -5,17 +5,19 @@
 - **ترمينال** — بطاقة تفاصيل كاملة بألوان
 - **بوت تلكرام** — كل شيء بأزرار ملونة بدون أوامر
 
-## التثبيت بأمر واحد
+## التثبيت بأمر واحد (ويندوز)
 
-### ويندوز
 ```bat
-pip install -r RIVAL_requirements.txt
+git clone https://github.com/Avetaar/AvetaarPhone && cd AvetaarPhone && python Avetaar.py
 ```
 
-### لينكس / ماك
+## التثبيت بأمر واحد (لينكس / ماك)
+
 ```bash
-pip install -r RIVAL_requirements.txt
+git clone https://github.com/Avetaar/AvetaarPhone && cd AvetaarPhone && python3 Avetaar.py
 ```
+
+الكود يثبّت كل الاعتماديات تلقائيًا أول مرة (phonenumbers, requests, colorama) — مو محتاج تكتب `pip install`.
 
 ## التشغيل
 
